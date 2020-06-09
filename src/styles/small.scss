@@ -29,6 +29,10 @@ button {
   font-weight: bold;
 }
 
+/* colors */
+.bg-white { background-color: var(--white); }
+.bg-blue { background-color: var(--blue); }
+
 /*typography*/
 .nowrap { text-wrap: nowrap; }
 .body { font-size: 1rem; }
@@ -176,6 +180,9 @@ button {
 .col-10 { flex: 0 0 83.333%; }
 .col-11 { flex: 0 0 91.666%; }
 .col-12 { flex: 0 0 100%; }
+
+/*cursor*/
+.pointer { cursor: pointer }
 
 /*gallery*/
 .crop-to-fit img {

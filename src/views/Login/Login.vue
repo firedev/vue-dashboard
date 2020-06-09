@@ -1,5 +1,8 @@
 <template>
   <div class="flex mx-auto container justify-center">
+    <div class="absolute right-0 pr1">
+      <Toggle @click="toggleDarkMode" :value="isDarkMode" />
+    </div>
     <div class="flex flex-column mx-auto" style="max-width: 40rem">
       <img src="@/assets/logo.svg" />
       <h3>Sign In</h3>
@@ -20,3 +23,21 @@
     </div>
   </div>
 </template>
+
+<script>
+import Toggle from '@/components/Toggle.vue'
+
+export default {
+  data() { return {
+    isDarkMode: true,
+  }},
+  methods: {
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode
+    },
+  },
+  components: {
+    Toggle,
+  },
+}
+</script>
