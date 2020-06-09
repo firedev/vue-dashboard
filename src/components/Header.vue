@@ -1,13 +1,9 @@
 <template>
-  <div class="hello"><h1>Dashboard</h1></div>
+  <h1>Dashboard</h1>
 </template>
 
 <script>
 export default {
-  name: "Header",
+  name: 'Header',
 }
 </script>
-
-<style>
-
-</style>

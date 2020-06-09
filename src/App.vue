@@ -1,50 +1,61 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
+  <div
+    id="app"
+    :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
+  >
+    <div class="absolute right-0 m2">
+      <Toggle :value="isDarkMode" @click="toggleDarkMode" />
     </div>
-    <router-view />
+    <Nav />
+    <div class="center">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-@import '@/styles/colors.scss';
-@import '@/styles/typography.scss';
-@import '@/styles/small.scss';
-
 body {
-  background-color: $dark-blue;
+  background-color: var(--dark-blue);
 }
-
-h1 {
-  @include heading-1;
-}
-
-p {
-  @include large-text-bold;
-}
-
 a {
-  color: $teal;
+  color: var(--teal);
 }
-
-#app {
-  font-family: $system-font-family;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: $white;
+.light-background {
+  background-color: var(--light-gray);
+  color: var(--dark-blue);
 }
-
-#nav {
-  padding: 2rem;
-  a {
-    padding: 0 1rem;
-    font-weight: bold;
-    &.router-link-exact-active {
-      color: $white;
-    }
-  }
+.dark-background {
+  background-color: var(--dark-blue);
+  color: var(--white);
 }
 </style>
+
+<script>
+import Nav from '@/components/Nav.vue'
+import Toggle from '@/components/Toggle.vue'
+
+export default {
+  components: {
+    Nav,
+    Toggle,
+  },
+  data() {
+    return {
+      isDarkMode: true,
+    }
+  },
+  updated() {
+    document.body.style.backgroundColor = window.getComputedStyle(
+      document.getElementById('app')
+    ).backgroundColor
+    document.body.style.color = window.getComputedStyle(
+      document.getElementById('app')
+    ).color
+  },
+  methods: {
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode
+    },
+  },
+}
+</script>
