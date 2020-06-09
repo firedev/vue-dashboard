@@ -12,7 +12,8 @@
   --h4: 1.25rem;
 }
 * { box-sizing: border-box; }
-body { line-height: 1.5; min-height: 100%; margin: 0; padding: 0; font-family: var(--font-family); }
+html, body { height: 100% }
+body { line-height: 1.5; margin: 0; padding: 0; font-family: var(--font-family); }
 h1, h2, h3 { margin-top: 0; margin-bottom: 1rem; }
 h1, .h1 { font-size: var(--h2) }
 h2, .h2 { font-size: var(--h3) }
@@ -142,11 +143,13 @@ button {
 .m3 { margin: 2rem }
 .m4 { margin: 4rem; margin: 4rem; }
 .mx { margin-left: .25rem; margin-right: .25rem; }
+.mx0 { margin-top: 0; margin-bottom: 0; }
 .mx1 { margin-left: .5rem; margin-right: .5rem; }
 .mx2 { margin-left: 1rem; margin-right: 1rem; }
 .mx3 { margin-left: 2rem; margin-right: 2rem; }
 .mx4 { margin-left: 4rem; margin-right: 4rem; }
 .my { margin-top: .25rem; margin-bottom: .25rem; }
+.my0 { margin-top: 0; margin-bottom: 0; }
 .my1 { margin-top: .5rem; margin-bottom: .5rem; }
 .my2 { margin-top: 1rem; margin-bottom: 1rem; }
 .my3 { margin-top: 2rem; margin-bottom: 2rem; }

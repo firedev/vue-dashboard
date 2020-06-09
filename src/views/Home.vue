@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <Header />
-    <img src="../assets/logo.svg" />
-  </div>
+  <Header />
 </template>
 
 <script>

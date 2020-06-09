@@ -12,6 +12,7 @@
   a {
     opacity: 0.5;
     &.router-link-exact-active {
+      font-weight: bold;
       opacity: 1;
     }
   }

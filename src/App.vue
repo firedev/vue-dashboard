@@ -4,7 +4,7 @@
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
     <div class="absolute right-0 m2">
-      <Toggle :value="isDarkMode" @click="toggleDarkMode" />
+      <Toggle />
     </div>
     <Nav />
     <div class="center">
@@ -14,8 +14,8 @@
 </template>
 
 <style lang="scss">
-body {
-  background-color: var(--dark-blue);
+#app {
+  min-height: 100%;
 }
 a {
   color: var(--teal);
@@ -39,22 +39,9 @@ export default {
     Nav,
     Toggle,
   },
-  data() {
-    return {
-      isDarkMode: true,
-    }
-  },
-  updated() {
-    document.body.style.backgroundColor = window.getComputedStyle(
-      document.getElementById('app')
-    ).backgroundColor
-    document.body.style.color = window.getComputedStyle(
-      document.getElementById('app')
-    ).color
-  },
-  methods: {
-    toggleDarkMode() {
-      this.isDarkMode = !this.isDarkMode
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode
     },
   },
 }
