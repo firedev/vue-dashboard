@@ -11,6 +11,7 @@
 <style lang="scss">
 @import '@/styles/colors.scss';
 @import '@/styles/typography.scss';
+@import '@/styles/small.scss';
 
 body {
   background-color: $dark-blue;
@@ -24,7 +25,9 @@ p {
   @include large-text-bold;
 }
 
-a { color: $teal }
+a {
+  color: $teal;
+}
 
 #app {
   font-family: $system-font-family;
