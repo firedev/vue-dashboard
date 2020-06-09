@@ -24,6 +24,8 @@ p {
   @include large-text-bold;
 }
 
+a { color: $teal }
+
 #app {
   font-family: $system-font-family;
   -webkit-font-smoothing: antialiased;
@@ -33,10 +35,10 @@ p {
 }
 
 #nav {
-  padding: 30px;
+  padding: 2rem;
   a {
+    padding: 0 1rem;
     font-weight: bold;
-    color: #2c3e50;
     &.router-link-exact-active {
       color: $white;
     }
