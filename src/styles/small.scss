@@ -208,6 +208,9 @@ button {
 /* responsive */
 .md-show { display: none }
 
+/* utilities */
+.animated { transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
 @media(min-width: 40rem) {
   h1, .h1 { font-size: var(--h1) }
   h2, .h2 { font-size: var(--h2) }

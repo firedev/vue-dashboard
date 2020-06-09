@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
+    :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode, animated: true }"
   >
     <div class="absolute right-0 m2">
       <Toggle />
