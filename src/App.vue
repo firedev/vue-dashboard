@@ -3,11 +3,10 @@
     id="app"
     class="animated"
     :class="{ 'light-mode': !isDarkMode, 'dark-mode': isDarkMode }"
-    >
-    <Nav :isDarkMode="isDarkMode" />
-    <div class="z1 absolute top-0 right-0 m2">
+  >
+    <Nav :is-dark-mode="isDarkMode">
       <Toggle />
-    </div>
+    </Nav>
     <div class="center container mx-auto px2">
       <router-view />
     </div>
@@ -36,7 +35,9 @@ a {
 .light-mode .contrast-dark-mode {
   background-color: #47a;
 }
-.animate__animated { animation-duration: 0.6s }
+.animate__animated {
+  animation-duration: 0.6s;
+}
 </style>
 
 <script>

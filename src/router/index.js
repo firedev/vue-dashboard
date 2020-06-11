@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { currentUser as netlifyCurrentUser } from 'netlify-identity-widget'
 
+import { auth } from '@/main'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login/Login.vue'
+import Logout from '@/views/Login/Logout.vue'
 import Reset from '@/views/Login/Reset.vue'
-import Register from '@/views/Login/Register.vue'
+import Request from '@/views/Login/Request.vue'
 import Stack from '@/views/Stack.vue'
+import Members from '@/views/Members.vue'
 
 Vue.use(VueRouter)
 
@@ -16,8 +18,35 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      requiresAuth: 'true',
+      isInMenu: true,
     },
+  },
+  {
+    path: '/stack',
+    name: 'Stack',
+    component: Stack,
+    meta: {
+      isInMenu: true,
+    },
+  },
+  {
+    path: '/members',
+    name: 'Members',
+    component: Members,
+    meta: {
+      isInMenu: true,
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/request',
+    name: 'Request',
+    component: Request,
+  },
+  {
+    path: '/reset',
+    name: 'Reset',
+    component: Reset,
   },
   {
     path: '/login',
@@ -25,19 +54,12 @@ const routes = [
     component: Login,
   },
   {
-    path: '/stack',
-    name: 'Stack',
-    component: Stack,
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-  },
-  {
-    path: '/Reset',
-    name: 'Reset',
-    component: Reset,
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ]
 
@@ -48,9 +70,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = netlifyCurrentUser()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  if (requiresAuth && !currentUser) {
+  if (requiresAuth && !auth.currentUser()) {
     next('login')
   } else {
     next()

@@ -6,6 +6,9 @@
   --border-radius: 0.25rem;
 
   --white: #fff;
+  --black: #000;
+  --yellow: yellow;
+  --orange: orange;
   --blue: #3672f8;
 
   --h1: 5rem;
@@ -28,6 +31,7 @@ input, button, textarea {
   border-radius: var(--border-radius);
   padding: 0.5rem;
   font-size: 1rem;
+  font-family: var(--font-family);
   border: 0;
 }
 button {
@@ -37,9 +41,18 @@ button {
   font-weight: bold;
 }
 
-/* colors */
+/* bg-colors */
 .bg-white { background-color: var(--white); }
+.bg-orange { background-color: var(--orange); }
+.bg-yellow { background-color: var(--yellow); }
 .bg-blue { background-color: var(--blue); }
+
+/* colors */
+.white { color: var(--white) }
+.black { color: var(--black) }
+.orange { color: var(--orange) }
+.yellow { color: var(--yellow) }
+.blue { color: var(--blue) }
 
 /*typography*/
 .nowrap { text-wrap: nowrap; }
@@ -79,10 +92,7 @@ button {
 .space-between { justify-content: space-between; }
 .vh100 { height: 100vh }
 .muted { opacity: .6 }
-
-/* colors */
-.white { color: white }
-.black { color: black }
+.opaque { opacity: 1 }
 
 /* borders */
 .border { border: transparent 1px solid }
@@ -95,8 +105,10 @@ button {
 /* position */
 .overflow-hidden { overflow: hidden }
 .relative { position: relative }
+.fixed { position: fixed }
 .absolute { position: absolute }
 .top-0 { top: 0 }
+.left-0 { left: 0 }
 .right-0 { right: 0 }
 .right { float: right; }
 .flex-1 { flex: 1 }
@@ -104,6 +116,9 @@ button {
 .cover { background-size: cover; background-position: center center }
 .nowrap { white-space: nowrap }
 .mx-auto { margin-left: auto; margin-right: auto }
+.center-absolute, .center-relative { left: 50% }
+.center-absolute .absolute { transform: translateX(-50%) }
+.center-relative .relative { left: -50% }
 
 .p { padding: .25rem; }
 .p1 { padding: .5rem; padding: .5rem; }

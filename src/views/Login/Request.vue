@@ -2,11 +2,11 @@
   <div class="flex mx-auto container justify-center">
     <form @submit.prevent="onSubmit">
       <div class="flex flex-column mx-auto" style="max-width: 40rem">
-        <Header>Login</Header>
+        <Header>Request</Header>
         <Notification v-if="message">{{ message }}</Notification>
         <transition
           appear
-          enter-active-class="animate__animated animate__fadeInDown delay-0"
+          enter-active-class="animate__animated animate__fadeIn delay-0"
         >
           <input
             v-model="email"
@@ -16,34 +16,12 @@
             placeholder="Email"
           />
         </transition>
-        <transition
-          appear
-          enter-active-class="animate__animated animate__fadeIn delay-0"
-        >
-          <input
-            v-model="password"
-            type="password"
-            autocomplete="current-password"
-            class="my"
-            placeholder="Password"
-          />
-        </transition>
         <div class="my"></div>
         <transition
           appear
           enter-active-class="animate__animated animate__fadeInUp delay-0"
         >
-          <button class="py2">Sign In</button>
-        </transition>
-        <transition
-          appear
-          enter-active-class="animate__animated animate__fadeIn delay-1"
-        >
-          <div class="flex justify-center my2">
-            <router-link to="/request">Request an account</router-link>
-            <div class="mx1">|</div>
-            <router-link class="muted" to="/reset">Forgot password</router-link>
-          </div>
+          <button class="py2">Request Access</button>
         </transition>
       </div>
     </form>
@@ -53,7 +31,6 @@
 <script>
 import Header from '@/components/Header.vue'
 import Notification from '@/components/Notification.vue'
-import { auth } from '@/main'
 
 export default {
   components: {
@@ -63,7 +40,6 @@ export default {
   data() {
     return {
       email: '',
-      password: '',
     }
   },
   computed: {
@@ -73,11 +49,22 @@ export default {
   },
   methods: {
     onSubmit() {
-      const email = this.email
-      const password = this.password
-      auth
-        .login(email, password, true)
-        .then(() => this.$router.replace('/'))
+      const slackURL = new URL('https://slack.com/api/chat.postMessage')
+      const data = {
+        token: 'xoxb-3022756781-1184397085204-greOlkTqRhOb8u3nQ0oDwdUq',
+        channel: 'vue-dashboard',
+        text: `${this.email} requested access to Dashboard`,
+      }
+      slackURL.search = new URLSearchParams(data)
+      fetch(slackURL, { method: 'POST' })
+        .then(() =>
+          this.$router.push({
+            name: 'Login',
+            params: {
+              message: 'Thanks, your request will be reviewed in a bit.',
+            },
+          })
+        )
         .catch(error => console.log('Error: ' + error))
     },
   },

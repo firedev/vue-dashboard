@@ -1,5 +1,8 @@
 <template>
-  <transition appear enter-active-class="animate__animated animate__slideInRight">
+  <transition
+    appear
+    enter-active-class="animate__animated animate__slideInRight"
+  >
     <div class="flex align-center pointer" @click="toggleDarkMode">
       <span>☀</span>
       <div class="r1 bg-white p flex mx1">

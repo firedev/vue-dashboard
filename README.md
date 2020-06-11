@@ -2,7 +2,11 @@
 
 # vue-dashboard
 
-Vue.js + Netlify Playground
+Vue.js Playground
+
+- Netlify Authentication
+- Slack Integration
+- CSS3 Animation
 
 https://firedev-vue-dashboard.netlify.app
 
