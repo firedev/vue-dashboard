@@ -11,7 +11,7 @@
       >
         <a
           :class="`delay-${index}`"
-          class="shadow button-hover block r2 p2 m2 center contrast-dark-mode flex-1"
+          class="shadow button-hover block r2 p2 m2 center contrast-dark-mode flex-1 md-col-4"
           style="max-width: 20rem"
           :href="tech.link"
         >
@@ -70,6 +70,11 @@ export default {
           name: 'ApexCharts',
           used: ['Charts'],
           link: 'https://apexcharts.com',
+        },
+        {
+          name: 'Firebase',
+          used: ['Firestore'],
+          link: 'https://firebase.com',
         },
       ],
     }
