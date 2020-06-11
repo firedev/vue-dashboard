@@ -1,5 +1,8 @@
 <template>
-  <nav id="nav" class="flex p2 mb2 shadow">
+  <nav
+    id="nav"
+    class="z1 animated relative flex p2 shadow follow-dark-mode"
+  >
     <div v-for="(route, index) in routes" :key="index">
       <span v-if="!!index" class="px1 muted">|</span>
       <router-link :key="index" :to="route.path">{{ route.name }}</router-link>
@@ -7,7 +10,7 @@
   </nav>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #nav {
   a {
     opacity: 0.5;
@@ -21,7 +24,11 @@
 
 <script>
 import { routes } from '@/router'
+
 export default {
+  props: {
+    isDarkMode: Boolean,
+  },
   computed: {
     routes() {
       return routes

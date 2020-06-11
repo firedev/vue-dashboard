@@ -1,5 +1,7 @@
 # vue-dashboard
 
+Vue.js Playground
+
 ## Project setup
 ```
 yarn install
