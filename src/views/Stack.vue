@@ -50,11 +50,27 @@ export default {
   data() {
     return {
       stack: [
-        { name: 'Vue', used: ['Components', 'Router', 'Transitions'], link: 'https://vuejs.org' },
-        { name: 'CSS3', used: ['Animation', 'Variables', 'Flexbox'], link: 'https://w3c.org' },
-        { name: 'Netlify', used: ['Hosting', 'Authorization'], link: 'https://netlify.app' },
+        {
+          name: 'Vue',
+          used: ['Components', 'Router', 'Transitions'],
+          link: 'https://vuejs.org',
+        },
+        {
+          name: 'CSS3',
+          used: ['Animation', 'Variables', 'Flexbox'],
+          link: 'https://w3c.org',
+        },
+        {
+          name: 'Netlify',
+          used: ['Hosting', 'Authorization'],
+          link: 'https://netlify.app',
+        },
         { name: 'Slack', used: ['Messaging'], link: 'https://slack.com' },
-        { name: 'ApexCharts', used: ['Charts'], link: 'https://apexcharts.com' },
+        {
+          name: 'ApexCharts',
+          used: ['Charts'],
+          link: 'https://apexcharts.com',
+        },
       ],
     }
   },

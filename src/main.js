@@ -1,12 +1,17 @@
 import Vue from 'vue'
 import GoTrue from 'gotrue-js'
 import { init as netlifyInit } from 'netlify-identity-widget'
+import VueGtag from 'vue-gtag'
 
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 netlifyInit()
+
+Vue.use(VueGtag, {
+  config: { id: 'UA-69016906-1' },
+})
 
 const auth = new GoTrue({
   APIUrl: 'https://firedev-vue-dashboard.netlify.app/.netlify/identity',

@@ -1,5 +1,8 @@
 <template>
-  <nav id="nav" class="auto bold flex align-stretch z1 animated relative flex align-center shadow follow-dark-mode">
+  <nav
+    id="nav"
+    class="auto bold flex align-stretch z1 animated relative flex align-center shadow follow-dark-mode"
+  >
     <router-link
       v-for="(route, index) in routes"
       :key="index"
@@ -32,7 +35,7 @@
       to="/logout"
       exact-active-class="opaque selected"
       class="muted px1 py2 flex align-center button-hover"
-      >
+    >
       {{ currentUser().email }} →
     </router-link>
   </nav>
