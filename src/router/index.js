@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { currentUser as netlifyCurrentUser } from 'netlify-identity-widget'
 
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login/Login.vue'
@@ -14,6 +15,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      requiresAuth: 'true',
+    },
   },
   {
     path: '/login',
@@ -41,6 +45,16 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const currentUser = netlifyCurrentUser()
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (requiresAuth && !currentUser) {
+    next('login')
+  } else {
+    next()
+  }
 })
 
 export { routes }

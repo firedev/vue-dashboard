@@ -24,12 +24,15 @@
 </template>
 
 <script>
+import { open as netlifyOpen } from 'netlify-identity-widget'
 import Header from '@/components/Header.vue'
 
 export default {
-  name: 'Home',
   components: {
     Header,
+  },
+  mounted() {
+    netlifyOpen();
   },
 }
 </script>
