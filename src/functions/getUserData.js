@@ -1,9 +1,12 @@
 const admin = require('firebase-admin')
 
-const serviceAccount = require('./serviceAccountKey.json')
-
+// https://stackoverflow.com/questions/41287108/deploying-firebase-app-with-service-account-to-heroku-environment-variables-wit
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    project_id: 'vue-dashboard-978d5',
+    private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  }),
   databaseURL: 'https://vue-dashboard-978d5.firebaseio.com',
 })
 

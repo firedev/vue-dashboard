@@ -2,6 +2,7 @@
 node_modules
 /dist
 /functions
+/src/functions/serviceAccountKey.json
 
 # local env files
 .env.local
