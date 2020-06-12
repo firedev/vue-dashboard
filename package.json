@@ -8,7 +8,7 @@
     "build:vue": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start:lambda": "netlify-lambda serve src/functions --config ./webpack.functions.js",
-    "build:lambda": "netlify-lambda build src/functions"
+    "build:lambda": "netlify-lambda build src/functions --config ./webpack.functions.js"
   },
   "dependencies": {
     "@firebase/app": "^0.6.5",
