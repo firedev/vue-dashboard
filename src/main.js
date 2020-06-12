@@ -9,14 +9,12 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-
 Vue.use(VueFirestore)
-
-netlifyInit()
-
 Vue.use(VueGtag, {
   config: { id: 'UA-69016906-1' },
 })
+
+netlifyInit()
 
 const auth = new GoTrue({
   APIUrl: 'https://firedev-vue-dashboard.netlify.app/.netlify/identity',

@@ -23,7 +23,7 @@
     </div>
     <apexchart
       id="chart"
-      width="100%"
+      width="99%"
       height="500px"
       type="area"
       :options="chartOptions"
