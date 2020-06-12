@@ -4,11 +4,13 @@
 
 Vue.js Playground
 
-- Netlify Authentication
-- Slack Integration
-- CSS3 Animation
+https://firedev-vue-dashboard.netlify.app/
 
-https://firedev-vue-dashboard.netlify.app
+- Vue: Router, Vuex, Transitions
+- Slack: Messaging
+- Firebase: Data storage
+- ApexCharts: Charts
+- CSS3: Animation, Variables, Flexbox
 
 ## Project setup
 ```

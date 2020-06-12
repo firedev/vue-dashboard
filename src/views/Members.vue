@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden">
+  <div>
     <Header>Members Only</Header>
 
     <form class="flex justify-center" @submit.prevent="onSubmit" >
@@ -56,7 +56,7 @@ export default {
       this.getUserData({ email: this.searchEmail })
     },
     getUserData(params) {
-      const url = new URL("//.netlify/functions/getUserData")
+      const url = new URL('https://firedev-vue-dashboard.netlify.app/.netlify/functions/getUserData')
       url.search = new URLSearchParams(params)
 
       this.name = "..."
