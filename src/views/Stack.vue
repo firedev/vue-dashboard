@@ -62,7 +62,7 @@ export default {
         },
         {
           name: 'Netlify',
-          used: ['Hosting', 'Authorization'],
+          used: ['Hosting', 'Functions', 'Authorization'],
           link: 'https://netlify.app',
         },
         { name: 'Slack', used: ['Messaging'], link: 'https://slack.com' },

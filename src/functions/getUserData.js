@@ -9,10 +9,14 @@ admin.initializeApp({
 
 exports.handler = function(event, context, callback) {
   const firestore = admin.firestore()
+
+  // https://docs.netlify.com/functions/build-with-javascript/#format
+  const { email } = event.queryStringParameters
+  //
   // https://googleapis.dev/nodejs/firestore/latest/Query.html#where
   firestore
     .collection('users')
-    .where('email', '==', 'nick@firedev.com')
+    .where('email', '==', email)
     .limit(1)
     .get()
     .then(responce => {
