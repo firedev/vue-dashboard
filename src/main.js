@@ -4,7 +4,7 @@ import { init as netlifyInit } from 'netlify-identity-widget'
 import VueGtag from 'vue-gtag'
 import VueFirestore from 'vue-firestore'
 
-import App from './App.vue'
+import Dash from './Dash.vue'
 import router from './router'
 import store from './store'
 
@@ -26,7 +26,7 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App),
+  render: h => h(Dash),
 }).$mount('#app')
 
 export { auth }
