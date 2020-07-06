@@ -7,20 +7,20 @@
         <transition
           appear
           enter-active-class="animate__animated animate__fadeIn delay-0"
-        >
+          >
           <input
             v-model="email"
             type="email"
             autocomplete="username"
             class="my"
             placeholder="Email"
-          />
+            />
         </transition>
         <div class="my"></div>
         <transition
           appear
           enter-active-class="animate__animated animate__fadeInUp delay-0"
-        >
+          >
           <button class="py2">Request Access</button>
         </transition>
       </div>
@@ -28,45 +28,41 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Component from 'vue-class-component'
+import Vue from 'vue'
+
 import Header from '@/components/Header.vue'
 import Notification from '@/components/Notification.vue'
 
-export default {
+@Component({
   components: {
     Header,
     Notification,
   },
-  data() {
-    return {
-      email: '',
+})
+export default class Request extends Vue {
+  email = ''
+  message():string {
+    return this.$route.params.message
+  }
+  onSubmit() {
+    const slackURL = new URL('https://slack.com/api/chat.postMessage')
+    const data = {
+      channel: 'vue-dashboard',
+      text: `${this.email} requested access to Dashboard`,
+      token: 'xoxb-3022756781-1184397085204-greOlkTqRhOb8u3nQ0oDwdUq',
     }
-  },
-  computed: {
-    message() {
-      return this.$route.params.message
-    },
-  },
-  methods: {
-    onSubmit() {
-      const slackURL = new URL('https://slack.com/api/chat.postMessage')
-      const data = {
-        token: 'xoxb-3022756781-1184397085204-greOlkTqRhOb8u3nQ0oDwdUq',
-        channel: 'vue-dashboard',
-        text: `${this.email} requested access to Dashboard`,
-      }
-      slackURL.search = new URLSearchParams(data)
-      fetch(slackURL, { method: 'POST' })
-        .then(() =>
-          this.$router.push({
-            name: 'Login',
-            params: {
-              message: 'Thanks, your request will be reviewed in a bit.',
-            },
-          })
-        )
-        .catch(error => console.log('Error: ' + error))
-    },
-  },
+    slackURL.search = new URLSearchParams(data).toString()
+    fetch(slackURL.toString(), { method: 'POST' })
+      .then(() =>
+        this.$router.push({
+          name: 'Login',
+          params: {
+            message: 'Thanks, your request will be reviewed in a bit.',
+          },
+        }),
+      )
+  }
 }
 </script>

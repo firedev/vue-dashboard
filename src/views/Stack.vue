@@ -40,7 +40,7 @@ img {
   height: 5rem;
 }
 </style>
-<script>
+<script lang="ts">
 import Header from '@/components/Header.vue'
 
 export default {
@@ -51,30 +51,39 @@ export default {
     return {
       stack: [
         {
+          link: 'https://vuejs.org',
           name: 'Vue',
           used: ['Components', 'Router', 'Transitions'],
-          link: 'https://vuejs.org',
         },
         {
+          link: 'https://typescriptlang.org',
+          name: 'Typescript',
+          used: ['Type checking'],
+        },
+        {
+          link: 'https://w3c.org',
           name: 'CSS3',
           used: ['Animation', 'Variables', 'Flexbox'],
-          link: 'https://w3c.org',
         },
         {
+          link: 'https://netlify.app',
           name: 'Netlify',
           used: ['Hosting', 'Functions', 'Authorization'],
-          link: 'https://netlify.app',
         },
-        { name: 'Slack', used: ['Messaging'], link: 'https://slack.com' },
         {
+          link: 'https://slack.com',
+          name: 'Slack',
+          used: ['Messaging'],
+        },
+        {
+          link: 'https://apexcharts.com',
           name: 'ApexCharts',
           used: ['Charts'],
-          link: 'https://apexcharts.com',
         },
         {
+          link: 'https://firebase.com',
           name: 'Firebase',
           used: ['Firestore'],
-          link: 'https://firebase.com',
         },
       ],
     }

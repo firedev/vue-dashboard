@@ -1,10 +1,10 @@
-import Vue from 'vue'
 import GoTrue from 'gotrue-js'
 import { init as netlifyInit } from 'netlify-identity-widget'
-import VueGtag from 'vue-gtag'
+import Vue from 'vue'
 import VueFirestore from 'vue-firestore'
+import VueGtag from 'vue-gtag'
 
-import Dash from './Dash.vue'
+import App from './App.vue'
 import router from './router'
 import store from './store'
 
@@ -24,9 +24,9 @@ const auth = new GoTrue({
 Vue.config.productionTip = false
 
 new Vue({
+  render: h => h(App),
   router,
   store,
-  render: h => h(Dash),
 }).$mount('#app')
 
 export { auth }

@@ -2,7 +2,7 @@
   <div>
     <Header>Members Only</Header>
 
-    <form class="flex justify-center" @submit.prevent="onSubmit" >
+    <form class="flex justify-center" @submit.prevent="onSubmit">
       <div class="px1">
         <input v-model="searchEmail" type="text" placeholder="Email" />
       </div>
@@ -16,37 +16,52 @@
       appear-active-class="animate__animated animate__flipInX"
       leave-active-class="animate__animated animate__flipOutX"
     >
-    <div v-show="show" class="md-flex justify-center md-col-4 m4">
-      <div class="shadow block r2 p2 center contrast-dark-mode">
-        <div class="h1">🔒</div>
-        <div class="h3 bold">Member-zone</div>
+      <div v-show="show" class="md-flex justify-center md-col-4 m4">
+        <div class="shadow block r2 p2 center contrast-dark-mode">
+          <div class="h1">🔒</div>
+          <div class="h3 bold">Member-zone</div>
+        </div>
       </div>
-    </div>
     </transition>
-      <div v-show="!show" class="animate__animated animate__fadeIn delay-5 my2">
+    <div v-show="!show" class="animate__animated animate__fadeIn delay-5 my2">
       <table class="border">
         <thead>
-          <tr><th>Name</th><th>Email</th><th>Trial ends</th></tr>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Trial ends</th>
+          </tr>
         </thead>
-        <tr><td>{{name}}</td><td>{{email}}</td><td>{{trialEndDate}}</td></tr>
+        <tr>
+          <td>{{ name }}</td>
+          <td>{{ email }}</td>
+          <td>{{ trialEndDate }}</td>
+        </tr>
       </table>
-      </div>
+    </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Header from '@/components/Header.vue'
+import Vue from 'vue'
 
-export default {
+interface IRecord {
+  name: string
+  email: string
+  trialEndDate: string
+}
+
+export default Vue.extend({
   components: {
     Header,
   },
   data() {
     return {
-      show: true,
-      searchEmail: 'nick@firedev.com',
       email: '...',
       name: '...',
+      searchEmail: 'nick@firedev.com',
+      show: true,
       trialEndDate: '...',
     }
   },
@@ -55,23 +70,24 @@ export default {
       this.show = false
       this.getUserData({ email: this.searchEmail })
     },
-    getUserData(params) {
-      const url = new URL('https://firedev-vue-dashboard.netlify.app/.netlify/functions/getUserData')
-      url.search = new URLSearchParams(params)
+    getUserData(params: { email: string }) {
+      const url = new URL(
+        'https://firedev-vue-dashboard.netlify.app/.netlify/functions/getUserData',
+      )
+      url.search = new URLSearchParams(params).toString()
 
-      this.name = "..."
-      this.email = "..."
-      this.trialEndDate = "..."
+      this.name = '...'
+      this.email = '...'
+      this.trialEndDate = '...'
 
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          console.log({ data })
-          this.name = data.name;
-          this.email = data.email;
-          this.trialEndDate = data.trialEndDate;
+      fetch(url.toString())
+        .then((res) => res.json())
+        .then((data: IRecord) => {
+          this.name = data.name
+          this.email = data.email
+          this.trialEndDate = data.trialEndDate
         })
-    }
-  }
-}
+    },
+  },
+})
 </script>

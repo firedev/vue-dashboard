@@ -1,17 +1,20 @@
-<template>
-  <transition
+<template lang="pug">
+  transition(
+    enter-active-class="animate__animated animate__fadeInRight"
     appear
-    enter-active-class="animate__animated animate__slideInRight"
-  >
-    <div class="flex align-center pointer" @click="toggleDarkMode">
-      <span>☀</span>
-      <div class="r1 bg-white p flex mx1">
-        <div class="bg-blue animated r1 p1" :class="{ on: isDarkMode }"></div>
-        <div class="rounded bg-white p"></div>
-      </div>
-      <span class="muted small">☾</span>
-    </div>
-  </transition>
+  )
+    .flex.align-center.pointer(
+      @click="toggleDarkMode"
+    )
+      span
+        | ☀
+      .r1.bg-white.p.flex.mx1
+        .bg-blue.animated.r1.p1(
+          :class="{ on: isDarkMode }"
+        )
+        .rounded.bg-white.p
+      span.muted.small
+        | ☾
 </template>
 
 <style scoped>
@@ -20,17 +23,18 @@
 }
 </style>
 
-<script>
-export default {
-  computed: {
-    isDarkMode() {
-      return this.$store.getters.isDarkMode
-    },
-  },
-  methods: {
-    toggleDarkMode() {
-      this.$store.commit('toggleDarkMode')
-    },
-  },
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component
+export default class Toggle extends Vue {
+  isDarkMode(): boolean {
+    return this.$store.getters.isDarkMode
+  }
+
+  toggleDarkMode() {
+    this.$store.commit('toggleDarkMode')
+  }
 }
 </script>

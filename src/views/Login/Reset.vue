@@ -7,20 +7,20 @@
         <transition
           appear
           enter-active-class="animate__animated animate__fadeInDown delay-0"
-        >
+          >
           <input
             v-model="email"
             type="email"
             autocomplete="username"
             class="my"
             placeholder="Email"
-          />
+            />
         </transition>
         <div class="my"></div>
         <transition
           appear
           enter-active-class="animate__animated animate__fadeInUp delay-0"
-        >
+          >
           <button class="py2">Reset Password</button>
         </transition>
       </div>
@@ -28,39 +28,39 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Component from 'vue-class-component'
+import Vue from 'vue'
+
 import Header from '@/components/Header.vue'
 import Notification from '@/components/Notification.vue'
 import { auth } from '@/main'
 
-export default {
+@Component({
   components: {
     Header,
     Notification,
   },
-  data() {
-    return {
-      email: '',
-    }
-  },
-  computed: {
-    message() {
-      return this.$route.params.message
-    },
-  },
-  methods: {
-    onSubmit() {
-      const email = this.email
-      auth
-        .requestPasswordRecovery(email)
-        .then(() =>
-          this.$router.push({
-            name: 'Login',
-            params: { message: 'Please check your email.' },
-          })
-        )
-        .catch(error => console.log('Error: ' + error))
-    },
-  },
+})
+export default class Reset extends Vue {
+  private email = ''
+
+  get message() {
+    return this.$route.params.message
+  }
+
+  private onSubmit(): void {
+    const email = this.email
+    auth
+    .requestPasswordRecovery(email)
+    .then(() =>
+      this.$router.push({
+        name: 'Login',
+        params: { message: 'Please check your email.' },
+      }),
+    )
+    // tslint:disable-next-line:no-console
+    .catch((error) => console.log('Error: ' + error))
+  }
 }
 </script>

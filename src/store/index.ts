@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 const LOCAL_STORAGE_KEY = 'isDarkMode'
 
+interface IDarkMode {
+  [LOCAL_STORAGE_KEY]: boolean
+}
+
 if (
   !window.localStorage.getItem(LOCAL_STORAGE_KEY) &&
   window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -12,20 +16,22 @@ if (
   window.localStorage.setItem(LOCAL_STORAGE_KEY, 'true')
 }
 
-const state = {
+const state: IDarkMode = {
   isDarkMode: window.localStorage.getItem(LOCAL_STORAGE_KEY) === 'true',
 }
 
 const mutations = {
-  toggleDarkMode(state) {
+  // tslint:disable-next-line:no-shadowed-variable
+  toggleDarkMode(state: IDarkMode) {
     state.isDarkMode = !state.isDarkMode
-    window.localStorage.setItem('isDarkMode', state.isDarkMode)
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, state.isDarkMode.toString())
   },
 }
 
 const getters = {
-  isDarkMode({ isDarkMode }) {
-    return isDarkMode
+  // tslint:disable-next-line:no-shadowed-variable
+  isDarkMode(state: IDarkMode) {
+    return state[LOCAL_STORAGE_KEY]
   },
 }
 

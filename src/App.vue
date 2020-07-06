@@ -1,16 +1,12 @@
-<template>
-  <div
-    id="app"
-    class="animated"
+<template lang="pug">
+  div#app.animated(
     :class="{ 'light-mode': !isDarkMode, 'dark-mode': isDarkMode }"
-  >
-    <Nav :is-dark-mode="isDarkMode">
-      <Toggle />
-    </Nav>
-    <div class="center container mx-auto px2">
-      <router-view />
-    </div>
-  </div>
+  )
+    ErrorBoundary
+      Nav(:is-dark-mode="isDarkMode")
+        Toggle
+      .center.container.mx-auto.px2
+        router-view
 </template>
 
 <style lang="scss">
@@ -40,20 +36,23 @@ a {
 }
 </style>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import 'animate.css'
 import Nav from '@/components/Nav.vue'
 import Toggle from '@/components/Toggle.vue'
+import ErrorBoundary from '@/components/ErrorBoundary.vue'
 
-export default {
+export default Vue.extend({
   components: {
     Nav,
     Toggle,
+    ErrorBoundary
   },
   computed: {
-    isDarkMode() {
+    isDarkMode(): boolean {
       return this.$store.getters.isDarkMode
     },
   },
-}
+})
 </script>

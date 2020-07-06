@@ -21,14 +21,14 @@
         </div>
       </div>
     </div>
-    <apexchart
+    <VueApexCharts
       id="chart"
       width="99%"
       height="500px"
       type="area"
       :options="chartOptions"
       :series="series"
-    ></apexchart>
+    />
   </div>
 </template>
 
@@ -55,120 +55,94 @@
 }
 </style>
 
-<script>
+<script lang="ts">
+import Component from 'vue-class-component'
+import Vue from 'vue'
+
 import VueApexCharts from 'vue-apexcharts'
 import Header from '@/components/Header.vue'
 import { db } from '@/firebase'
 
-export default {
+type Users = [string, number][]
+type Series = {
+  name: string
+  data: Users
+}[]
+
+@Component({
   components: {
     Header,
-    apexchart: VueApexCharts,
+    VueApexCharts,
   },
-  firestore() {
-    return {
-      traffic: {
-        // collection reference.
-        ref: db.collection('traffic'),
-        // Bind the collection as an object if you would like to.
-        objects: true,
-        resolve: traffic => {
-          const activeUsers = []
-          const newUsers = []
-          const todaysDate = new Date('February 7, 2020')
-          const range = 7
-          const previousDate = todaysDate.setDate(todaysDate.getDate() - range)
-          Object.keys(traffic.activeUsers).map(key => {
-            if (new Date(traffic.activeUsers[key][0]) > previousDate) {
-              activeUsers.push(traffic.activeUsers[key])
-            }
-          })
-          Object.keys(traffic.newUsers).map(key => {
-            if (new Date(traffic.newUsers[key][0]) > previousDate) {
-              newUsers.push(traffic.newUsers[key])
-            }
-          })
-          this.series = [
-            { name: 'active users', data: activeUsers },
-            { name: 'new users', data: newUsers },
-          ]
-        },
-        reject: console.log,
+})
+export default class Home extends Vue {
+  ranges = { days: 7, weeks: 30, months: 365 }
+  selected = 'days'
+  chartOptions = {
+    colors: ['#14f1d9', '#7b42f6'],
+    legend: {
+      labels: {
+        colors: [this.$store.getters.isDarkMode ? 'white' : 'black'],
       },
-    }
-  },
-  data() {
-    return {
-      ranges: { days: 7, weeks: 30, months: 365 },
-      selected: 'days',
-      chartOptions: {
-        colors: ['#14f1d9', '#7b42f6'],
-        legend: {
-          labels: {
-            colors: [this.$store.getters.isDarkMode ? 'white' : 'black'],
-          },
-          position: 'top',
-        },
-        tooltip: {
-          theme: 'dark',
-        },
-        grid: {
-          xaxis: {
-            lines: {
-              show: true,
-            },
-          },
-          yaxis: {
-            lines: {
-              show: false,
-            },
-          },
-        },
-        chart: {
-          id: 'users',
-        },
-        xaxis: {
-          type: 'datetime',
-        },
-      },
-      series: [],
-    }
-  },
-  methods: {
-    toggle(selected) {
-      this.selected = selected
-      const activeUsers = []
-      const newUsers = []
-      const todaysDate = new Date('February 7, 2020')
-      const range = JSON.parse(JSON.stringify(this.ranges))[selected]
-      const previousDate = todaysDate.setDate(todaysDate.getDate() - range)
-
-      this.$binding('activeUsers', db.collection('traffic').doc('activeUsers'))
-        .then(data =>
-          Object.keys(data).map(key => {
-            if (new Date(data[key][0]) > previousDate) {
-              activeUsers.push(data[key])
-            }
-          })
-        )
-        .catch(console.error)
-
-      this.$binding('newUsers', db.collection('traffic').doc('newUsers'))
-        .then(data =>
-          Object.keys(data).map(key => {
-            if (new Date(data[key][0]) > previousDate) {
-              newUsers.push(data[key])
-            }
-          })
-        )
-        .catch(console.error)
-
-      this.series = [
-        { name: 'active users', data: activeUsers },
-        { name: 'new users', data: newUsers },
-      ]
-      window.dispatchEvent(new Event('resize'))
+      position: 'top',
     },
-  },
+    tooltip: {
+      theme: 'dark',
+    },
+    grid: {
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
+    chart: {
+      id: 'users',
+    },
+    xaxis: {
+      type: 'datetime',
+    },
+  }
+  series: Series = []
+
+  toggle(selected: string) {
+    this.selected = selected
+    const activeUsers: Users = []
+    const newUsers: Users = []
+    const todaysDate = new Date('February 7, 2020')
+    const range = JSON.parse(JSON.stringify(this.ranges))[selected]
+    const previousDate = todaysDate.setDate(todaysDate.getDate() - range)
+
+    this.$binding('activeUsers', db.collection('traffic').doc('activeUsers'))
+      .then((data: Users) =>
+        Object.keys(data).map((key) => {
+          if (new Date(data[key][0]).getTime() > previousDate) {
+            activeUsers.push(data[key])
+          }
+        })
+      )
+      .catch(console.error)
+
+    this.$binding('newUsers', db.collection('traffic').doc('newUsers'))
+      .then((data: Users) =>
+        Object.keys(data).map((key) => {
+          if (new Date(data[key][0]).getTime() > previousDate) {
+            newUsers.push(data[key])
+          }
+        })
+      )
+      .catch(console.error)
+
+    this.series = [
+      { name: 'active users', data: activeUsers },
+      { name: 'new users', data: newUsers },
+    ]
+    window.dispatchEvent(new Event('resize'))
+  }
 }
 </script>

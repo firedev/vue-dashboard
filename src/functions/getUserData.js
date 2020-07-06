@@ -10,7 +10,7 @@ admin.initializeApp({
   databaseURL: 'https://vue-dashboard-978d5.firebaseio.com',
 })
 
-exports.handler = function(event, context, callback) {
+exports.handler = function(event, _context, callback) {
   const firestore = admin.firestore()
 
   // https://docs.netlify.com/functions/build-with-javascript/#format

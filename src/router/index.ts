@@ -5,71 +5,65 @@ import { auth } from '@/main'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login/Login.vue'
 import Logout from '@/views/Login/Logout.vue'
-import Reset from '@/views/Login/Reset.vue'
 import Request from '@/views/Login/Request.vue'
-import Stack from '@/views/Stack.vue'
+import Reset from '@/views/Login/Reset.vue'
 import Members from '@/views/Members.vue'
+import Stack from '@/views/Stack.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
     component: Home,
-    meta: {
-      isInMenu: true,
-    },
+    meta: { isInMenu: true },
+    name: 'Home',
+    path: '/',
   },
   {
-    path: '/stack',
-    name: 'Stack',
     component: Stack,
-    meta: {
-      isInMenu: true,
-    },
+    meta: { isInMenu: true },
+    name: 'Stack',
+    path: '/stack',
   },
   {
-    path: '/members',
-    name: 'Members',
     component: Members,
     meta: {
       isInMenu: true,
       requiresAuth: true,
     },
+    name: 'Members',
+    path: '/members',
   },
   {
-    path: '/request',
-    name: 'Request',
     component: Request,
+    name: 'Request',
+    path: '/request',
   },
   {
-    path: '/reset',
-    name: 'Reset',
     component: Reset,
+    name: 'Reset',
+    path: '/reset',
   },
   {
-    path: '/login',
-    name: 'Login',
     component: Login,
+    name: 'Login',
+    path: '/login',
   },
   {
-    path: '/logout',
-    name: 'Logout',
     component: Logout,
-    meta: {
-      requiresAuth: true,
-    },
+    meta: { requiresAuth: true },
+    name: 'Logout',
+    path: '/logout',
   },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
   base: process.env.BASE_URL,
+  mode: 'history',
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (requiresAuth && !auth.currentUser()) {
     next('login')
