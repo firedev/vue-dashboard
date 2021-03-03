@@ -23,7 +23,7 @@
     "gotrue-js": "^0.9.25",
     "netlify-identity-widget": "^1.6.0",
     "netlify-lambda": "^1.6.3",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.5.3",
     "vue-class-component": "^7.2.3",
